@@ -1,23 +1,31 @@
 # ROS/ROS2 bridge for CARLA simulator
 
-[![Actions Status](https://github.com/carla-simulator/ros-bridge/workflows/CI/badge.svg)](https://github.com/carla-simulator/ros-bridge)
-[![Documentation](https://readthedocs.org/projects/carla/badge/?version=latest)](http://carla.readthedocs.io)
-[![GitHub](https://img.shields.io/github/license/carla-simulator/ros-bridge)](https://github.com/carla-simulator/ros-bridge/blob/master/LICENSE)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/carla-simulator/ros-bridge)](https://github.com/carla-simulator/ros-bridge/releases/latest)
+This is a fork of [carla-simulator/ros-bridge](https://github.com/carla-simulator/ros-bridge) to adapt ros humble and carla 0.9.14.
 
- This ROS package is a bridge that enables two-way communication between ROS and CARLA. The information from the CARLA server is translated to ROS topics. In the same way, the messages sent between nodes in ROS get translated to commands to be applied in CARLA.
+### Environment
 
-![rviz setup](./docs/images/ad_demo.png "AD Demo")
+* OS: ubuntu 22.04
+* ROS2: Humble
 
-**This version requires CARLA 0.9.13**
+### Installation
 
-## Features
+Install client library
 
-- Provide Sensor Data (Lidar, Semantic lidar, Cameras (depth, segmentation, rgb, dvs), GNSS, Radar, IMU)
-- Provide Object Data (Transforms (via [tf](http://wiki.ros.org/tf)), Traffic light status, Visualization markers, Collision, Lane invasion)
-- Control AD Agents (Steer/Throttle/Brake)
-- Control CARLA (Play/pause simulation, Set simulation parameters)
+* download [python package](https://github.com/gezp/carla_ros/releases/tag/0.9.14) for ubuntu22.04
 
-## Getting started and documentation
+```
+ pip3 install <wheel-file-name>.whl
+```
 
-Installation instructions and further documentation of the ROS bridge and additional packages are found [__here__](https://carla.readthedocs.io/projects/ros-bridge/en/latest/).
+Build `carla-simulator/ros-bridge`
+```bash
+# cd workspace/src
+git clone --recurse-submodules https://github.com/gezp/carla_ros.git
+# install dependencies
+cd ..
+rosdep install --from-paths src --ignore-src -r
+# complie
+colcon colcon build --symlink-install
+```
+
+> Tip: carla server and client could run on differnet machines separately (or Docker Container), so you can install and run carla server on ubuntu18.04 which is officially supported platform, but run carla client and ROS on ubuntu22.04.
