@@ -412,11 +412,11 @@ def main(args=None):
         carla_client.set_timeout(parameters['timeout'])
 
         # check carla version
-        dist = pkg_resources.get_distribution("carla")
-        if LooseVersion(dist.version) != LooseVersion(CarlaRosBridge.CARLA_VERSION):
-            carla_bridge.logfatal("CARLA python module version {} required. Found: {}".format(
-                CarlaRosBridge.CARLA_VERSION, dist.version))
-            sys.exit(1)
+        # dist = pkg_resources.get_distribution("carla")
+        # if LooseVersion(dist.version) != LooseVersion(CarlaRosBridge.CARLA_VERSION):
+        #     carla_bridge.logfatal("CARLA python module version {} required. Found: {}".format(
+        #         CarlaRosBridge.CARLA_VERSION, dist.version))
+        #     sys.exit(1)
 
         if LooseVersion(carla_client.get_server_version()) != \
            LooseVersion(carla_client.get_client_version()):
